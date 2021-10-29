@@ -1,0 +1,30 @@
+Mesmo exemplo, separado em 3 pastas, para facilitar testes separados de cada parte:
+
+1) Apenas_planta
+Simula uma planta não-linear. No exemplo, um objeto com atitude variável.
+Para testar:
+- Executar funcoesAtitude
+- Executar funcoesPlanta
+- Abrir planta no Xcos e apertar play
+- Ver respostas nos gráfico
+
+2) EKF
+Simula uma planta não-linear, sensores ruidosos e EKF. No exemplo, estimador de atitude, descrita em angulos de Euler.
+Para testar:
+- Executar funcoesAtitude
+- Executar funcoesPlanta
+- Executar funcoesEKF
+- Abrir exemplo_EKF no Xcos e apertar play
+- Ver respostas nos gráfico
+- Executar plotarResultados
+
+3) UKF
+Simula uma planta não-linear, sensores ruidosos e UKF. No exemplo, estimador de atitude, descrita em angulos de Euler.
+Para testar:
+- Executar funcoesAtitude
+- Executar funcoesPlanta
+- Executar funcoesUKFaux
+- Executar funcoesUKF
+- Abrir exemplo_UKF no Xcos e apertar play
+- Ver respostas nos gráfico
+- Executar plotarResultados

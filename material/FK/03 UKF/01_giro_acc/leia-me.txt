@@ -1,0 +1,2 @@
+O exemplo é o mesmo do FK estendido/01_giro_acc, mas utilizando UKF ao invés de EKF.
+O exemplo feito no Simulink utiliza as funções sigmas.m, unsCov.m e unsTrans.m que estão disponíveis nessa pasta. Estude e entenda o que cada uma dessas funções faz.
