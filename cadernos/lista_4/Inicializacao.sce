@@ -29,14 +29,17 @@ Bd = sys_d.B;
 // Condições iniciais
 x0 = [0.5, 0, -0.1]';
 
-// Desvio padrão dos sensores
-sigma_alpha = sqrt(16e-2);
-sigma_theta = sqrt(4e-2);
-sigma_delta = sqrt(1e-2);
+// Variância dos sensores
+var_alpha = 16e-2;
+var_theta = 4e-2;
+var_delta = 1e-2;
+sigma_alpha = sqrt(var_alpha);
+sigma_theta = sqrt(var_theta);
+sigma_delta = sqrt(var_delta);
 
 // Matrizes de erro do sistema
-Q = [sigma_delta^2]
-R = [sigma_alpha^2 0; 0 sigma_theta^2]
+Q = [var_delta]
+R = [var_alpha 0; 0 var_theta]
 
 // Importa funções definidas em arquivos na mesma pasta (.sci)
 getd();
