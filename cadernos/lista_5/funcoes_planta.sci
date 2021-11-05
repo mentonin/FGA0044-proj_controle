@@ -7,18 +7,18 @@ function [x_] = modeloPlanta(x, u)
     // Saída:
     // x_: derivada do vetor de estados
 
-    x_(1,:) = x(2,:);
-    x_(2,:) = - (x(2,:) .* abs(x(2,:)) + u);
+    x_(1, :) = x(2, :);
+    x_(2, :) = - (x(2, :) .* abs(x(2, :)) + u);
 end
 
 
 function [y] = modeloSaidas(x)
-    // Modelo contínuo do sensor. Calcula as saídas do modelo a partir do vetor de
-    // estados.
+    // Modelo contínuo do sensor. Calcula as saídas do modelo a partir
+    // do vetor de estados.
     // Entrada:
     // x: vetor de estados
 
-    y = 10 * exp(-x(1,:));
+    y = 10 * exp(-x(1, :));
 end
 
 

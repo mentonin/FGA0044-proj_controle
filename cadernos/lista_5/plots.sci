@@ -1,15 +1,15 @@
 function figs = plotsKF(u, x, y, u_m, y_m, x_hat, y_hat, P, base_path)
     figs = [
-        plotEstados(xk, x_hat, base_path);
-        plotP(Pk, base_path);
-        plotErro(yk, y_hat, base_path);
-        plotSaida(yk, y_m, y_hat, base_path);
-    ]
+        plotEstados(x, x_hat, base_path);
+        plotP(P, base_path);
+        plotErro(y, y_hat, base_path);
+        plotSaida(y, y_m, y_hat, base_path);
+    ];
 end
 
-function [fig] = plotEstados(xk, x_hat, base_path)
+function [fig] = plotEstados(x, x_hat, base_path)
     fig = scf();
-    plot(xk.time, xk.values, "-");
+    plot(x.time, x.values, "-");
     plot(x_hat.time, x_hat.values, "--");
     gca().x_location = "origin";
     xtitle("Estados", "t (s)", "x", boxed=%T);
@@ -23,21 +23,21 @@ function [fig] = plotEstados(xk, x_hat, base_path)
 end
 
 
-function [fig] = plotP(Pk, base_path)
+function [fig] = plotP(P, base_path)
     fig = scf();
-    P_diag = zeros(size(Pk.values)(3), 2);
-    for i=1:size(Pk.values)(1)
-        P_diag(:, i) = Pk.values(i, i, :)(:);
+    P_diag = zeros(size(P.values)(3), 2);
+    for i=1:size(P.values, 1)
+        P_diag(:, i) = P.values(i, i, :)(:);
     end
-    plot(Pk.time, [P_diag]);
+    plot(P.time, [P_diag]);
     xtitle("Variância Estimada", "t (s)", "P", boxed=%T);
     xs2pdf(fig, base_path + "Pdiag");
 end
 
 
-function [fig] = plotErro(yk, y_hat, base_path)
+function [fig] = plotErro(y, y_hat, base_path)
     fig = scf();
-    plot(yk.time, y_hat.values - yk.values);
+    plot(y.time, y_hat.values - y.values);
     gca().x_location = "origin";
     xtitle("Erro", "t (s)", "Potência (W)", boxed=%T);
     legend([
@@ -47,11 +47,11 @@ function [fig] = plotErro(yk, y_hat, base_path)
 end
 
 
-function [fig] = plotSaida(yk, y_m, y_hat, base_path)
+function [fig] = plotSaida(y, y_m, y_hat, base_path)
     fig = scf();
-    plot(y_m.time, y_m.values, ":", "Color", "#CCCCCC");
-    plot(yk.time, yk.values, "-");
-    plot(y_hat.time, y_hat.values, "--");
+    plot("nl", y_m.time, y_m.values, ":", "Color", "#CCCCCC");
+    plot("nl", y.time, y.values, "-");
+    plot("nl", y_hat.time, y_hat.values, "--");
     gca().x_location = "origin";
     xtitle("Sensor da antena", "t (s)", "Potência (W)", boxed=%T);
     legend([
