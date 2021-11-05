@@ -1,15 +1,13 @@
-FOLDER = "./graficos/"
-
-function figs = plotsKF(u, x, y, u_m, y_m, x_hat, y_hat, P, prefixo)
+function figs = plotsKF(u, x, y, u_m, y_m, x_hat, y_hat, P, base_path)
     figs = [
-        plotEstados(xk, x_hat, prefixo);
-        plotP(Pk, prefixo);
-        plotErro(yk, y_hat, prefixo);
-        plotSaida(yk, y_m, y_hat, prefixo);
+        plotEstados(xk, x_hat, base_path);
+        plotP(Pk, base_path);
+        plotErro(yk, y_hat, base_path);
+        plotSaida(yk, y_m, y_hat, base_path);
     ]
 end
 
-function [fig] = plotEstados(xk, x_hat, prefixo)
+function [fig] = plotEstados(xk, x_hat, base_path)
     fig = scf();
     plot(xk.time, xk.values, "-");
     plot(x_hat.time, x_hat.values, "--");
@@ -21,11 +19,11 @@ function [fig] = plotEstados(xk, x_hat, prefixo)
         "$\hat{x}_1$",
         "$\hat{x}_2$",
     ]);
-    xs2pdf(fig, FOLDER + prefixo + "estados");
+    xs2pdf(fig, base_path + "estados");
 end
 
 
-function [fig] = plotP(Pk, prefixo)
+function [fig] = plotP(Pk, base_path)
     fig = scf();
     P_diag = zeros(size(Pk.values)(3), 2);
     for i=1:size(Pk.values)(1)
@@ -33,11 +31,11 @@ function [fig] = plotP(Pk, prefixo)
     end
     plot(Pk.time, [P_diag]);
     xtitle("Variância Estimada", "t (s)", "P", boxed=%T);
-    xs2pdf(fig, FOLDER + prefixo + "Pdiag");
+    xs2pdf(fig, base_path + "Pdiag");
 end
 
 
-function [fig] = plotErro(yk, y_hat, prefixo)
+function [fig] = plotErro(yk, y_hat, base_path)
     fig = scf();
     plot(yk.time, y_hat.values - yk.values);
     gca().x_location = "origin";
@@ -45,11 +43,11 @@ function [fig] = plotErro(yk, y_hat, prefixo)
     legend([
         "$\hat{y} - y$",
     ]);
-    xs2pdf(fig, FOLDER + prefixo + "erro");
+    xs2pdf(fig, base_path + "erro");
 end
 
 
-function [fig] = plotSaida(yk, y_m, y_hat, prefixo)
+function [fig] = plotSaida(yk, y_m, y_hat, base_path)
     fig = scf();
     plot(y_m.time, y_m.values, ":", "Color", "#CCCCCC");
     plot(yk.time, yk.values, "-");
@@ -61,7 +59,7 @@ function [fig] = plotSaida(yk, y_m, y_hat, prefixo)
         "$y$",
         "$\hat{y}$",
     ]);
-    xs2pdf(fig, FOLDER + prefixo + "saida");
+    xs2pdf(fig, base_path + "saida");
 end
 
     // exec("avaliaConsistenciaX.sce", 2);

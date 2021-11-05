@@ -17,7 +17,7 @@ disp("Simulando EKF...")
 xcos_simulate(sys, 4);
 
 disp("Plotando EKF...")
-plotsKF(cos(xk.time), xk, yk, u_m, y_m, x_hat, y_hat, Pk, "EKF_");
+plotsKF(cos(xk.time), xk, yk, u_m, y_m, x_hat, y_hat, Pk, "./graficos/EKF_");
 
 // UKF
 // disp("Carregando UKF...")
