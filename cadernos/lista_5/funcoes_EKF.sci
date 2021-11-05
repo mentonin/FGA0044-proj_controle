@@ -40,7 +40,8 @@ function [y_hat, x_hat, P_hat] = atualizacaoEKF(y_m, x_inter, P_inter, R)
     y_hat = modeloSaidas(x_inter);
     ey = y_m - y_hat;
     S = (H * P_inter * H') + R;
-    K = P_inter * H' * inv(S);
+    K = P_inter * H' / S;
     x_hat = x_inter + (K * ey);
-    P_hat = (eye(P_inter) - K * H) * P_inter;
+    I_KH = eye(P_inter) - K * H;
+    P_hat = I_KH * P_inter * I_KH' + K * R * K';
 end

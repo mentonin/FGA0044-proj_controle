@@ -1,3 +1,6 @@
+rand("seed", getdate("s"));
+seeds = rand(2, 2);
+
 // Período de amostragem
 T = 0.01;
 

@@ -8,7 +8,7 @@ function [x_] = modeloPlanta(x, u)
     // x_: derivada do vetor de estados
 
     x_(1, :) = x(2, :);
-    x_(2, :) = - (x(2, :) .* abs(x(2, :)) + u);
+    x_(2, :) = - x(2, :) .* abs(x(2, :)) + u;
 end
 
 
@@ -57,4 +57,3 @@ function [H] = JacobianoH(x, u, T)
 
     H = [-10 * exp(-x(1)), 0];
 end
-
