@@ -22,7 +22,7 @@ function [x_inter, P_inter] = predicaoEKF(u, x_old, P_old, Q, T)
 end
 
 
-function [y_hat, x_new, P_new] = atualizacaoEKF(y_m, x_inter, P_inter, R)
+function [y_hat, x_hat, P_hat] = atualizacaoEKF(y_m, x_inter, P_inter, R)
     // Efetua a etapa de atualização do EKF. Calcula a matriz jacobiana
     // do sensor e os valores estimados de y e da variância.
     // Entrada:
@@ -31,9 +31,9 @@ function [y_hat, x_new, P_new] = atualizacaoEKF(y_m, x_inter, P_inter, R)
     // P_inter: matriz de covariância do estado estimado
     // R: matriz de covariância do sensor
     // Saída:
-    // y_hat: valor estimado do sensor
-    // x_new: estado estimado atualizado
-    // P_new: matriz de covariância do estado estimado atualizado
+    // y_hat: valor estimado da saída
+    // x_hat: estado estimado atualizado
+    // P_hat: matriz de covariância do estado estimado atualizado
 
     H = JacobianoH(x_inter);
 
@@ -41,6 +41,6 @@ function [y_hat, x_new, P_new] = atualizacaoEKF(y_m, x_inter, P_inter, R)
     ey = y_m - y_hat;
     S = (H * P_inter * H') + R;
     K = P_inter * H' * inv(S);
-    x_new = x_inter + (K * ey);
-    P_new = (eye(P_inter) - K * H) * P_inter;
+    x_hat = x_inter + (K * ey);
+    P_hat = (eye(P_inter) - K * H) * P_inter;
 end
