@@ -19,6 +19,7 @@ function [fig] = plotEstados(x, x_hat, base_path)
         "$\hat{x}_1$",
         "$\hat{x}_2$",
     ]);
+    replot([%nan, %nan; -1, 3]);
     xs2pdf(fig, base_path + "estados");
 end
 
@@ -29,7 +30,7 @@ function [fig] = plotP(P, base_path)
     for i=1:size(P.values, 1)
         P_diag(:, i) = P.values(i, i, :)(:);
     end
-    plot(P.time, [P_diag]);
+    plot("nl", P.time, [P_diag]);
     xtitle("Variância Estimada", "t (s)", "P", boxed=%T);
     xs2pdf(fig, base_path + "Pdiag");
 end
@@ -37,21 +38,24 @@ end
 
 function [fig] = plotErro(y, y_hat, base_path)
     fig = scf();
-    plot(y.time, y_hat.values - y.values);
+    y_ = interp1(y.time, y.values, y_hat.time);
+    plot(y_hat.time, y_hat.values - y_);
     gca().x_location = "origin";
     xtitle("Erro", "t (s)", "Potência (W)", boxed=%T);
     legend([
         "$\hat{y} - y$",
     ]);
+    replot([%nan, %nan; -1, 1]);
     xs2pdf(fig, base_path + "erro");
 end
 
 
 function [fig] = plotSaida(y, y_m, y_hat, base_path)
     fig = scf();
-    plot("nl", y_m.time, y_m.values, ":", "Color", "#CCCCCC");
-    plot("nl", y.time, y.values, "-");
-    plot("nl", y_hat.time, y_hat.values, "--");
+    log_flag = "nn"
+    plot(log_flag, y_m.time, y_m.values, ":", "Color", "#CCCCCC");
+    plot(log_flag, y.time, y.values, "-");
+    plot(log_flag, y_hat.time, y_hat.values, "--");
     gca().x_location = "origin";
     xtitle("Sensor da antena", "t (s)", "Potência (W)", boxed=%T);
     legend([
@@ -59,6 +63,7 @@ function [fig] = plotSaida(y, y_m, y_hat, base_path)
         "$y$",
         "$\hat{y}$",
     ]);
+    replot([%nan, %nan; 1, 20]);
     xs2pdf(fig, base_path + "saida");
 end
 
