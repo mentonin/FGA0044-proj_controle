@@ -11,5 +11,5 @@ P0 = diag([4, 4]);
 x0_hat = x0 + P0 * rand(2, 1, "n");
 
 // Parâmetros da simulação
-tf = 30;
+tf = 10;
 buffer = ceil(tf / T) * 100;

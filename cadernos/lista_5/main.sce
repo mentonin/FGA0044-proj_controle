@@ -9,7 +9,7 @@ exec("inicializacao.sce", 0)
 // EKF
 disp("Carregando EKF...")
 sys = xcosDiagramToScilab("EKF.zcos");
-sys.tf = tf;
+sys.props.tf = tf;
 sys.objs(7).model.rpar(2:3) = [1, 1] * 10;
 sys.objs(7).graphics.exprs(8) = "10 10";
 
