@@ -60,9 +60,9 @@ end
 function [fig] = plotSaida(y, y_m, y_hat, base_path)
     fig = scf();
     log_flag = "nn";
-    plot(log_flag, y_m.time, y_m.values, ":", "LineWidth", 1)//, "Color", ["lightblue1", "orange1"]);
-    plot(log_flag, y.time, y.values, "-", "LineWidth", 1)//, "Color", ["lightblue4", "orange4"]);
-    plot(log_flag, y_hat.time, y_hat.values, "--", "LineWidth", 1)//, "Color", ["lightblue3", "orange3"]);
+    plot(log_flag, y_m.time, y_m.values, ":", "LineWidth", 1, "Color", ["#CCCCCC", "#CCCCCC"]);
+    plot(log_flag, y.time, y.values, "-", "LineWidth", 1, "Color", ["blue4", "green4"]);
+    plot(log_flag, y_hat.time, y_hat.values, "--", "LineWidth", 1, "Color", ["blue3", "green3"]);
     gca().x_location = "origin";
     xtitle("Sensor da antena", "t (s)", "ângulo (rad)", boxed=%T);
     legend([
