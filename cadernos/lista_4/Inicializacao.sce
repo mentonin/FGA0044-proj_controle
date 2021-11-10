@@ -8,6 +8,10 @@
 // https://www.scilab.org/sites/default/files/Control-System-Toolbox-in-Scilab.pdf
 
 
+// Inicialização do gerador aleatório
+rand("seed", getdate("s"));
+seeds = rand(2, 2);
+
 // Matrizes do modelo contínuo extraídas da lista.
 A = [ -4.1172,  0.7781, 0.0;
      -33.8836, -3.5729, 0.0;
@@ -28,6 +32,7 @@ Bd = sys_d.B;
 
 // Condições iniciais
 x0 = [0.5, 0, -0.1]';
+x0_hat = x0 + rand(3, 1, "n");
 
 // Variância dos sensores
 var_alpha = 16e-2;
@@ -38,8 +43,8 @@ sigma_theta = sqrt(var_theta);
 sigma_delta = sqrt(var_delta);
 
 // Matrizes de erro do sistema
-Q = [var_delta]
-R = [var_alpha 0; 0 var_theta]
+Q = [var_delta];
+R = [var_alpha 0; 0 var_theta];
 
-// Importa funções definidas em arquivos na mesma pasta (.sci)
-getd();
+// Sensores funcionando depois de 3 segundos
+sensores = [1, 1];
