@@ -12,7 +12,7 @@ function [fig] = plotEstados(x, x_hat, base_path)
     plot(x.time, x.values, "-");
     plot(x_hat.time, x_hat.values, "--");
     gca().x_location = "origin";
-    xtitle("Estados", "t (s)", "x", boxed=%T);
+    xtitle("Estados reais e estimados", "t (s)", "x", boxed=%T);
     legend([
         "$x_1$",
         "$x_2$",
