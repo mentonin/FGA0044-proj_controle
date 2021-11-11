@@ -5,6 +5,8 @@ function [figs] = plotsKF(u, x, y, u_m, y_m, x_hat, y_hat, P, base_path)
         plotErro(y, y_hat, base_path);
         plotSaida(y, y_m, y_hat, base_path);
     ];
+    avaliaConsistenciaX(x, x_hat, P);
+    xs2pdf(gcf(), base_path + "chi2");
 end
 
 function [fig] = plotEstados(x, x_hat, base_path)
@@ -63,7 +65,7 @@ function [fig] = plotSaida(y, y_m, y_hat, base_path)
     gca().x_location = "origin";
     xtitle("Sensor da antena", "t (s)", "Potência (W)", boxed=%T);
     legend("$y_m$", "$y$", "$\hat{y}$");
-    replot([%nan, %nan; 1, 20]);
+    replot([%nan, %nan; 0, 10]);
     xs2pdf(fig, base_path + "saida");
 end
 
